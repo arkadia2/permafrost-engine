@@ -326,7 +326,7 @@ static void audio_create_settings(void)
         .name = "pf.audio.music_playback_mode",
         .val = (struct sval) {
             .type = ST_TYPE_INT,
-            .as_bool = s_music_mode
+            .as_int = s_music_mode
         },
         .prio = 0,
         .validate = audio_music_mode_validate,
