@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\CMakeFiles\d459f9ea256b535a08a242225e6d1cfe\INSTALL_force.rule">
+    <CustomBuild Include="E:\code\permafrost-engine\deps\openal-soft\CMakeFiles\fa8ee436a5443438a3c38258dde00d1c\INSTALL_force.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{3A82FC0D-B698-38E6-92AC-33B71FF22E88}</UniqueIdentifier>
+      <UniqueIdentifier>{CEB42D0C-C3B4-39AB-A758-CB2017DE14B2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

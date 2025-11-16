@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="src\anim\anim.c" />
     <ClCompile Include="src\anim\anim_asset_load.c" />
+    <ClCompile Include="src\anim\anim_texture.c" />
     <ClCompile Include="src\asset_load.c" />
     <ClCompile Include="src\audio\al_audio.c" />
     <ClCompile Include="src\audio\al_effect.c" />
@@ -73,6 +74,7 @@
     <ClCompile Include="src\pf_math.c" />
     <ClCompile Include="src\phys\collision.c" />
     <ClCompile Include="src\phys\projectile.c" />
+    <ClCompile Include="src\render\gl_anim.c" />
     <ClCompile Include="src\render\gl_batch.c" />
     <ClCompile Include="src\render\gl_image_quilt.c" />
     <ClCompile Include="src\render\gl_minimap.c" />
@@ -83,8 +85,10 @@
     <ClCompile Include="src\render\gl_shader.c" />
     <ClCompile Include="src\render\gl_shadows.c" />
     <ClCompile Include="src\render\gl_skybox.c" />
+    <ClCompile Include="src\render\gl_sprite.c" />
     <ClCompile Include="src\render\gl_state.c" />
     <ClCompile Include="src\render\gl_statusbar.c" />
+    <ClCompile Include="src\render\gl_swapchain.c" />
     <ClCompile Include="src\render\gl_terrain.c" />
     <ClCompile Include="src\render\gl_texture.c" />
     <ClCompile Include="src\render\gl_tile.c" />
@@ -109,6 +113,7 @@
     <ClCompile Include="src\script\py_ui_style.c" />
     <ClCompile Include="src\session.c" />
     <ClCompile Include="src\settings.c" />
+    <ClCompile Include="src\sprite.c" />
     <ClCompile Include="src\task.c" />
     <ClCompile Include="src\ui.c" />
     <ClCompile Include="src\version.c" />
@@ -117,6 +122,7 @@
     <ClInclude Include="src\anim\anim_ctx.h" />
     <ClInclude Include="src\anim\anim_data.h" />
     <ClInclude Include="src\anim\anim_private.h" />
+    <ClInclude Include="src\anim\anim_texture.h" />
     <ClInclude Include="src\anim\public\anim.h" />
     <ClInclude Include="src\anim\public\skeleton.h" />
     <ClInclude Include="src\asset_load.h" />
@@ -188,6 +194,7 @@
     <ClInclude Include="src\phys\public\collision.h" />
     <ClInclude Include="src\phys\public\phys.h" />
     <ClInclude Include="src\render\gl_assert.h" />
+    <ClInclude Include="src\render\gl_anim.h" />
     <ClInclude Include="src\render\gl_batch.h" />
     <ClInclude Include="src\render\gl_image_quilt.h" />
     <ClInclude Include="src\render\gl_material.h" />
@@ -197,6 +204,7 @@
     <ClInclude Include="src\render\gl_ringbuffer.h" />
     <ClInclude Include="src\render\gl_shader.h" />
     <ClInclude Include="src\render\gl_state.h" />
+    <ClInclude Include="src\render\gl_swapchain.h" />
     <ClInclude Include="src\render\gl_texture.h" />
     <ClInclude Include="src\render\gl_vertex.h" />
     <ClInclude Include="src\render\public\render.h" />
@@ -221,6 +229,7 @@
     <ClInclude Include="src\script\py_ui_style.h" />
     <ClInclude Include="src\session.h" />
     <ClInclude Include="src\settings.h" />
+    <ClInclude Include="src\sprite.h" />
     <ClInclude Include="src\task.h" />
     <ClInclude Include="src\ui.h" />
   </ItemGroup>

@@ -1,425 +1,425 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\auxeffectslot.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\auxeffectslot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\buffer.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effect.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\effect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effects\autowah.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\effects\autowah.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effects\chorus.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\effects\chorus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effects\compressor.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\effects\compressor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effects\convolution.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\effects\convolution.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effects\dedicated.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\effects\dedicated.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effects\distortion.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\effects\distortion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effects\echo.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\effects\echo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effects\equalizer.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\effects\equalizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effects\fshifter.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\effects\fshifter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effects\modulator.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\effects\modulator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effects\null.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\effects\null.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effects\pshifter.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\effects\pshifter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effects\reverb.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\effects\reverb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effects\vmorpher.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\effects\vmorpher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\error.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\error.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\event.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\event.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\extension.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\extension.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\filter.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\filter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\listener.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\listener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\source.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\state.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\al\state.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\alc.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\alc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\alu.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\alu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\alconfig.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\alconfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\bformatdec.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\bformatdec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\buffer_storage.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\buffer_storage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\converter.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\converter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effectslot.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\effectslot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effects\autowah.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\effects\autowah.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effects\chorus.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\effects\chorus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effects\compressor.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\effects\compressor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effects\convolution.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\effects\convolution.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effects\dedicated.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\effects\dedicated.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effects\distortion.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\effects\distortion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effects\echo.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\effects\echo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effects\equalizer.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\effects\equalizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effects\fshifter.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\effects\fshifter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effects\modulator.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\effects\modulator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effects\null.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\effects\null.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effects\pshifter.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\effects\pshifter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effects\reverb.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\effects\reverb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effects\vmorpher.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\effects\vmorpher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\helpers.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\helpers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\hrtf.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\hrtf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\panning.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\panning.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\uiddefs.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\uiddefs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\voice.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\voice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\backends\base.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\backends\base.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\backends\loopback.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\backends\loopback.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\backends\null.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\backends\null.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\backends\winmm.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\backends\winmm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\backends\dsound.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\backends\dsound.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\backends\wasapi.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\backends\wasapi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\backends\wave.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\alc\backends\wave.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\ambdec.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\ambdec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\bs2b.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\bs2b.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\bsinc_tables.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\bsinc_tables.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\cpu_caps.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\cpu_caps.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\devformat.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\devformat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\except.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\except.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\filters\biquad.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\filters\biquad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\filters\nfc.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\filters\nfc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\filters\splitter.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\filters\splitter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\fmt_traits.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\fmt_traits.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\fpu_ctrl.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\fpu_ctrl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\logging.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\logging.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\mastering.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\mastering.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\uhjfilter.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\uhjfilter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\mixer\mixer_c.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\mixer\mixer_c.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\mixer\mixer_sse.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\mixer\mixer_sse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\mixer\mixer_sse2.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\mixer\mixer_sse2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\mixer\mixer_sse3.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\mixer\mixer_sse3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\mixer\mixer_sse41.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\core\mixer\mixer_sse41.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\auxeffectslot.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\al\auxeffectslot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\buffer.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\al\buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effect.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\al\effect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\effects\effects.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\al\effects\effects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\event.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\al\event.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\filter.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\al\filter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\listener.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\al\listener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\al\source.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\al\source.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\alcmain.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\alcmain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\alu.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\alu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\alconfig.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\alconfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\alcontext.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\alcontext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\async_event.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\async_event.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\bformatdec.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\bformatdec.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\buffer_storage.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\buffer_storage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\compat.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\compat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\converter.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\converter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effectslot.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\effectslot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\effects\base.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\effects\base.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\front_stablizer.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\front_stablizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\hrtf.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\hrtf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\inprogext.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\inprogext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\voice.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\voice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\voice_change.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\voice_change.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\backends\base.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\backends\base.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\backends\loopback.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\backends\loopback.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\backends\null.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\backends\null.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\backends\winmm.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\backends\winmm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\backends\dsound.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\backends\dsound.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\backends\wasapi.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\backends\wasapi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\alc\backends\wave.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\alc\backends\wave.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\hrtf_default.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\hrtf_default.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\ambdec.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\ambdec.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\ambidefs.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\ambidefs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\bs2b.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\bs2b.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\bsinc_defs.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\bsinc_defs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\bsinc_tables.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\bsinc_tables.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\bufferline.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\bufferline.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\cpu_caps.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\cpu_caps.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\devformat.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\devformat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\except.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\except.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\filters\biquad.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\filters\biquad.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\filters\nfc.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\filters\nfc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\filters\splitter.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\filters\splitter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\fmt_traits.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\fmt_traits.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\fpu_ctrl.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\fpu_ctrl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\logging.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\logging.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\mastering.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\mastering.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\uhjfilter.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\uhjfilter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\mixer\defs.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\mixer\defs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\mixer\hrtfbase.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\mixer\hrtfbase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\core\mixer\hrtfdefs.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\core\mixer\hrtfdefs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\include\AL\al.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\include\AL\al.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\include\AL\alc.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\include\AL\alc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\include\AL\alext.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\include\AL\alext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\include\AL\efx.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\include\AL\efx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\CMakeFiles\4ceb31ef1213f4ce1e1833329a1d2142\hrtf_default.h.rule">
+    <CustomBuild Include="E:\code\permafrost-engine\deps\openal-soft\CMakeFiles\799de633ff65fc21530ce424385518ca\hrtf_default.h.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\CMakeLists.txt" />
+    <CustomBuild Include="E:\code\permafrost-engine\deps\openal-soft\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\resources\openal32.rc">
+    <ResourceCompile Include="E:\code\permafrost-engine\deps\openal-soft\resources\openal32.rc">
       <Filter>Source Files</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{3A82FC0D-B698-38E6-92AC-33B71FF22E88}</UniqueIdentifier>
+      <UniqueIdentifier>{CEB42D0C-C3B4-39AB-A758-CB2017DE14B2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{FB710A32-D171-3E8C-9336-C6E201203475}</UniqueIdentifier>
+      <UniqueIdentifier>{5F051FA5-4124-38B7-831E-B31A84811467}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{17CE8B3A-EB14-383F-8D49-4B9054AF180C}</UniqueIdentifier>
+      <UniqueIdentifier>{52A85B58-6282-3B9C-AA5A-308044F29795}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

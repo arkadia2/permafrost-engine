@@ -1,111 +1,111 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\alcomplex.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\common\alcomplex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\alfstream.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\common\alfstream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\almalloc.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\common\almalloc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\alstring.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\common\alstring.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\dynload.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\common\dynload.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\polyphase_resampler.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\common\polyphase_resampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\ringbuffer.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\common\ringbuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\strutils.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\common\strutils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\threads.cpp">
+    <ClCompile Include="E:\code\permafrost-engine\deps\openal-soft\common\threads.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\albit.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\albit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\albyte.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\albyte.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\alcomplex.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\alcomplex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\aldeque.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\aldeque.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\alfstream.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\alfstream.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\almalloc.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\almalloc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\alnumeric.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\alnumeric.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\aloptional.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\aloptional.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\alspan.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\alspan.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\alstring.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\alstring.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\atomic.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\atomic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\dynload.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\dynload.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\intrusive_ptr.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\intrusive_ptr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\math_defs.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\math_defs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\opthelpers.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\opthelpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\polyphase_resampler.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\polyphase_resampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\pragmadefs.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\pragmadefs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\ringbuffer.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\ringbuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\strutils.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\strutils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\threads.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\threads.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\vecmat.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\vecmat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\common\vector.h">
+    <ClInclude Include="E:\code\permafrost-engine\deps\openal-soft\common\vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\Admin\source\repos\permafrost-engine\deps\openal-soft\CMakeLists.txt" />
+    <CustomBuild Include="E:\code\permafrost-engine\deps\openal-soft\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{FB710A32-D171-3E8C-9336-C6E201203475}</UniqueIdentifier>
+      <UniqueIdentifier>{5F051FA5-4124-38B7-831E-B31A84811467}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{17CE8B3A-EB14-383F-8D49-4B9054AF180C}</UniqueIdentifier>
+      <UniqueIdentifier>{52A85B58-6282-3B9C-AA5A-308044F29795}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
