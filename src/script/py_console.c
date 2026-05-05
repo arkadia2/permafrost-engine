@@ -432,7 +432,7 @@ static void on_update(void *user, void *event)
 
         int len = strlen(s_inputbuff);
         nk_layout_row_push(ctx, 0.8);
-        nk_edit_string(ctx, NK_EDIT_SIMPLE | NK_EDIT_ALWAYS_INSERT_MODE | NK_EDIT_ALLOW_TAB, 
+        nk_edit_string(ctx, NK_EDIT_FIELD | NK_EDIT_ALWAYS_INSERT_MODE | NK_EDIT_ALLOW_TAB, 
             s_inputbuff, &len, sizeof(s_inputbuff), nk_filter_default);
         len = MIN(len, sizeof(s_inputbuff)-1);
         s_inputbuff[len] = '\0';
