@@ -1,24 +1,11 @@
+cmake_minimum_required(VERSION 3.16)
+project(glew LANGUAGES C)
+
 if ( NOT DEFINED CMAKE_BUILD_TYPE )
   set( CMAKE_BUILD_TYPE Release CACHE STRING "Build type" )
 endif ()
 
-project (glew C)
-
-cmake_minimum_required (VERSION 2.8.12)
-
 include(GNUInstallDirs)
-
-if(POLICY CMP0003)
-  cmake_policy (SET CMP0003 NEW)
-endif()
-
-if(POLICY CMP0042)
-  cmake_policy (SET CMP0042 NEW)
-endif()
-
-if (POLICY CMP0072)
-  cmake_policy (SET CMP0072 NEW)
-endif(POLICY CMP0072)
 
 set(CMAKE_DEBUG_POSTFIX d)
 
@@ -51,14 +38,6 @@ endif()
 
 find_package (OpenGL REQUIRED)
 
-# cmake<3.10 doesn't detect EGL/GLX
-if (CMAKE_VERSION VERSION_LESS 3.10)
-  find_library(OPENGL_egl_LIBRARY NAMES EGL)
-  if (OPENGL_egl_LIBRARY)
-    set (OpenGL_EGL_FOUND TRUE)
-  endif ()
-endif ()
-
 # prefer GLVND
 if (OPENGL_opengl_LIBRARY)
   set (GLEW_LIBRARIES ${OPENGL_opengl_LIBRARY})
@@ -69,7 +48,7 @@ endif ()
 # X11 required except for Windows and Apple OSX platforms
 if (GLEW_X11 AND NOT WIN32 AND NOT APPLE)
   find_package (X11)
-  list (APPEND GLEW_LIBRARIES ${X11_LIBRARIES})
+  list (APPEND GLEW_LIBRARIES ${OPENGL_glx_LIBRARY} ${X11_LIBRARIES})
 endif()
 
 if (WIN32)
@@ -143,7 +122,9 @@ if (MSVC)
   # add options from visual studio project
   target_compile_definitions (glew PRIVATE "GLEW_BUILD;VC_EXTRALEAN")
   target_compile_definitions (glew_s PRIVATE "GLEW_STATIC;VC_EXTRALEAN")
-  target_link_libraries (glew LINK_PRIVATE -BASE:0x62AA0000)
+  if(CMAKE_SYSTEM_PROCESSOR MATCHES "^(i?86|x86|x86_32)$")
+	  target_link_libraries (glew LINK_PRIVATE -BASE:0x62AA0000)
+  endif()
   # kill security checks which are dependent on stdlib
   target_compile_options (glew PRIVATE -GS-)
   target_compile_options (glew_s PRIVATE -GS-)
@@ -176,15 +157,10 @@ endif()
 target_link_libraries (glew LINK_PUBLIC ${GLEW_LIBRARIES})
 target_link_libraries (glew_s ${GLEW_LIBRARIES})
 
-if(CMAKE_VERSION VERSION_LESS 2.8.12)
-  set(MAYBE_EXPORT "")
-else()
-  target_compile_definitions(glew_s INTERFACE "GLEW_STATIC")
-  foreach(t glew glew_s)
-    target_include_directories(${t} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
-  endforeach()
-  set(MAYBE_EXPORT EXPORT glew-targets)
-endif()
+target_compile_definitions(glew_s INTERFACE "GLEW_STATIC")
+foreach(t glew glew_s)
+  target_include_directories(${t} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+endforeach()
 
 set(targets_to_install "")
 if(BUILD_SHARED_LIBS)
@@ -194,11 +170,11 @@ else ()
 endif()
 
 install ( TARGETS ${targets_to_install}
-          ${MAYBE_EXPORT}
-          RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-          LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-          ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-          FRAMEWORK DESTINATION ${CMAKE_INSTALL_PREFIX}
+          EXPORT glew-targets
+          RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT Runtime
+          LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT Runtime
+          ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT Development
+          FRAMEWORK DESTINATION ${CMAKE_INSTALL_PREFIX} COMPONENT Runtime
 )
 
 if (BUILD_UTILS)
@@ -231,7 +207,8 @@ if (BUILD_UTILS)
   endif ()
 
   install ( TARGETS glewinfo visualinfo
-            DESTINATION ${CMAKE_INSTALL_BINDIR})
+            DESTINATION ${CMAKE_INSTALL_BINDIR}
+            COMPONENT Runtime)
 endif ()
 
 set (prefix ${CMAKE_INSTALL_PREFIX})
@@ -252,28 +229,31 @@ configure_file (${GLEW_DIR}/glew.pc.in ${CMAKE_CURRENT_BINARY_DIR}/glew.pc @ONLY
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/glew.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
+        COMPONENT Development
 )
 
-if(WIN32 AND MSVC AND (NOT MSVC_VERSION LESS 1600) AND (NOT CMAKE_VERSION VERSION_LESS "3.1"))
+if(WIN32 AND MSVC AND (NOT MSVC_VERSION LESS 1600))
     install(
         FILES $<TARGET_PDB_FILE:glew>
         DESTINATION ${CMAKE_INSTALL_LIBDIR}
         CONFIGURATIONS Debug RelWithDebInfo
+        COMPONENT Runtime
     )
 endif()
 
 install (
     FILES ${GLEW_PUBLIC_HEADERS_FILES}
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/GL)
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/GL
+    COMPONENT Development)
 
-if(MAYBE_EXPORT)
-  install(EXPORT glew-targets DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/glew
-    NAMESPACE GLEW::)
-  install(FILES
-      ${CMAKE_CURRENT_SOURCE_DIR}/glew-config.cmake
-      ${CMAKE_CURRENT_SOURCE_DIR}/CopyImportedTargetProperties.cmake
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/glew)
-endif()
+install(EXPORT glew-targets DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/glew
+  COMPONENT Development
+  NAMESPACE GLEW::)
+install(FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}/glew-config.cmake
+    ${CMAKE_CURRENT_SOURCE_DIR}/CopyImportedTargetProperties.cmake
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/glew
+  COMPONENT Development)
 
 if(NOT TARGET uninstall)
   configure_file(

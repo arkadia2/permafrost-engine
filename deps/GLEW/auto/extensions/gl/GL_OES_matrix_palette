@@ -19,5 +19,6 @@ GL_OES_matrix_palette
 	GL_WEIGHT_ARRAY_BUFFER_BINDING_OES 0x889E
 	GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OES 0x8B9E
 	void glCurrentPaletteMatrixOES (GLuint index)
+	void glLoadPaletteFromModelViewMatrixOES (void)
 	void glMatrixIndexPointerOES (GLint size, GLenum type, GLsizei stride, void *pointer)
 	void glWeightPointerOES (GLint size, GLenum type, GLsizei stride, void *pointer)

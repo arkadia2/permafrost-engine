@@ -63,11 +63,6 @@
 #    define APIENTRY
 #  endif
 #endif
-#ifndef GLAPI
-#  if defined(__MINGW32__) || defined(__CYGWIN__)
-#    define GLAPI extern
-#  endif
-#endif
 /* <winnt.h> */
 #ifndef CALLBACK
 #define GLEW_CALLBACK_DEFINED
@@ -142,7 +137,8 @@ typedef _W64 int ptrdiff_t;
  */
 
 #if defined(__APPLE__) || defined(__linux__)
-#  if defined(__cplusplus)
+/* GCC12 errors out when including <cstdint> with __cplusplus < 201103L */
+#  if defined(__cplusplus) && __cplusplus >= 201103L
 #    include <cstddef>
 #    include <cstdint>
 #  else

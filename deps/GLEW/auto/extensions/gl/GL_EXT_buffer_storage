@@ -12,4 +12,3 @@ GL_EXT_buffer_storage
 	GL_BUFFER_IMMUTABLE_STORAGE_EXT 0x821F
 	GL_BUFFER_STORAGE_FLAGS_EXT 0x8220
 	void glBufferStorageEXT (GLenum target, GLsizeiptr size, const void *data, GLbitfield flags)
-	void glNamedBufferStorageEXT (GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags)
