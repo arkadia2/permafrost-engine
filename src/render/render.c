@@ -190,7 +190,8 @@ static bool dm_validate(const struct sval *new_val)
     if(new_val->type != ST_TYPE_INT)
         return false;
 
-    return new_val->as_int == PF_WF_FULLSCREEN
+    return new_val->as_int == 0
+        || new_val->as_int == PF_WF_FULLSCREEN
         || new_val->as_int == PF_WF_BORDERLESS_WIN
         || new_val->as_int == PF_WF_WINDOW;
 }

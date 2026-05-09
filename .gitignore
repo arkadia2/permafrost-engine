@@ -17,6 +17,7 @@
 
 *.pyc
 *.pickle
+*.log
 tags
 
 pf.conf

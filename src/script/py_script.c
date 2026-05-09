@@ -4422,6 +4422,10 @@ void S_ShowLastError(void)
     PyErr_NormalizeException(&s_err_ctx.type, &s_err_ctx.value, &s_err_ctx.traceback);
 
     if(s_err_ctx.occurred) {
+        /* Print the Python traceback to stderr so we can see what went wrong */
+        PyErr_Display(s_err_ctx.type, s_err_ctx.value, s_err_ctx.traceback);
+        fflush(stderr);
+
         s_err_ctx.prev_state = G_GetSimState();
         G_SetSimState(G_PAUSED_FULL);
     }
