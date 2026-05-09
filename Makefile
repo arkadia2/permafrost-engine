@@ -84,32 +84,36 @@ WINDOWS_MIMALLOC_LINKER_FLAG = $(WINDOWS_MIMALLOC_$(TYPE)_LINKER_FLAG)
 
 ifneq ($(OS),Windows_NT)
 WINDOWS_GLEW_OPTS = "SYSTEM=linux-mingw64"
+else
+WINDOWS_GLEW_OPTS = "SYSTEM=msys-win64" LIB.SHARED.DIR=lib
 endif
 WINDOWS_GLEW_OPTS += LDFLAGS.EXTRA="-mcrtdll=ucrt -lucrt -nostdlib"
 
 WINDOWS_SDL2_CONFIG = --host=x86_64-w64-mingw32
 WINDOWS_PYTHON_CONFIG = --host=x86_64-w64-mingw32
-WINDOWS_PYTHON_DEFS = "-D__USE_MINGW_ANSI_STDIO=1 -D__MINGW32__"
+WINDOWS_PYTHON_DEFS = "-std=gnu89 -D__USE_MINGW_ANSI_STDIO=1 -D__MINGW32__"
 WINDOWS_PYTHON_LDFLAGS = "-mcrtdll=ucrt -lucrt"
 WINDOWS_PYTHON_TARGET = libpython2.7.dll
 WINDOWS_OPENAL_OPTS = \
+	-G "Unix Makefiles" \
 	-DCMAKE_TOOLCHAIN_FILE=XCompile.txt \
 	-DHOST=x86_64-w64-mingw32 \
 	-DALSOFT_UTILS=OFF \
 	-DALSOFT_EXAMPLES=OFF \
 	-DCMAKE_SHARED_LINKER_FLAGS="-mcrtdll=ucrt -lucrt"
 WINDOWS_MIMALLOC_OPTS = \
+	-G "Unix Makefiles" \
 	-DCMAKE_SYSTEM_NAME=Windows \
 	-DCMAKE_SYSTEM_PROCESSOR=x86_64 \
 	-DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc \
 	-DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++ \
 	-DCMAKE_RC_COMPILER=x86_64-w64-mingw32-windres \
-	-DCMAKE_LINKER=x86_64-w64-wingw32-ld \
 	-DCMAKE_SHARED_LINKER_FLAGS="-mcrtdll=ucrt -lucrt"
 
 WINDOWS_CC = x86_64-w64-mingw32-gcc
 WINDOWS_BIN = ./lib/pf.exe
 WINDOWS_LDFLAGS = \
+	-static-libgcc \
 	$(WINDOWS_MIMALLOC_LINKER_FLAG) \
 	-mcrtdll=ucrt \
 	-lucrt \
@@ -194,7 +198,7 @@ CFLAGS = \
 LDFLAGS = \
 	-L./lib/ \
 	-lm \
-	-lpthread \
+	-Wl,-Bstatic -lpthread -Wl,-Bdynamic \
 	$(ASAN_LDFLAGS) \
 	$(TSAN_LDFLAGS) \
 	$(LTO_LDFLAGS) \
@@ -219,7 +223,7 @@ endif
 	mkdir -p ./lib
 	make -C $(GLEW_SRC) extensions 
 	make -C $(GLEW_SRC) $(GLEW_OPTS) glew.lib.shared
-	cp $(GLEW_SRC)/lib/$(GLEW_LIB) $@
+	cp $(GLEW_SRC)/lib/$(GLEW_LIB) $@ || cp $(GLEW_SRC)/bin/$(GLEW_LIB) $@
 
 ./lib/$(SDL2_LIB):
 	mkdir -p ./lib
@@ -284,8 +288,8 @@ $(BIN): $(PF_OBJS)
 	@printf "%-8s %s\n" "[LD]" $@
 	@$(CC) $^ -o $(BIN) $(LDFLAGS)
 ifeq ($(OS),Windows_NT)
-	@./deps/mimalloc/bin/minject.exe -f $@
-	@mv ./lib/pf-mi.exe $@
+	@-./deps/mimalloc/bin/minject.exe -f $@ 2>/dev/null || echo "minject skipped (not available)"
+	@if [ -f ./lib/pf-mi.exe ]; then mv ./lib/pf-mi.exe $@; fi
 endif
 
 ./obj/version.o: .FORCE
@@ -298,6 +302,8 @@ endif
 pf: $(BIN)
 
 clean_deps:
+	cd deps/GLEW && make clean
+	cd deps/GLEW/auto && make clean
 	cd deps/GLEW && git clean -f -d
 	cd deps/SDL2 && git clean -f -d
 	cd deps/Python && git clean -f -d

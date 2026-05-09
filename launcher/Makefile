@@ -21,13 +21,13 @@ endif
 
 launcher: obj/res.o
 	mkdir -p obj
-	$(CROSS_COMPILE)gcc main.c obj/res.o -DBIN_PATH=$(BIN_PATH) -DSCRIPT_PATH=$(SCRIPT_PATH) -Wl,-subsystem,windows,-ldbghelp -o $(BIN)
+	$(CROSS_COMPILE)gcc main.c obj/res.o -DBIN_PATH=$(BIN_PATH) -DSCRIPT_PATH=$(SCRIPT_PATH) -static-libgcc -Wl,-subsystem,windows,-ldbghelp -o $(BIN)
 
 else #PLAT != WINDOWS
 
 launcher:
 	mkdir -p obj
-	$(CROSS_COMPILE)gcc main.c -DBIN_PATH=$(BIN_PATH) -DSCRIPT_PATH=$(SCRIPT_PATH) -o $(BIN)
+	$(CROSS_COMPILE)gcc main.c -DBIN_PATH=$(BIN_PATH) -DSCRIPT_PATH=$(SCRIPT_PATH) -static-libgcc -o $(BIN)
 
 endif
 
