@@ -124,12 +124,13 @@ static uint64_t         s_last_frames_allocd_bytes[NFRAMES_LOGGED];
 
 static uint64_t tid_to_key(SDL_threadID tid)
 {
-    union{
-        SDL_threadID as_tid;
-        uint64_t     as_u64;
-    }ret = {0};
-    ret.as_tid = tid;
-    return ret.as_u64;
+    // union{
+    //     SDL_threadID as_tid;
+    //     uint64_t     as_u64;
+    // }ret = {0};
+    // ret.as_tid = tid;
+    // return ret.as_u64;
+    return (uint64_t)tid;
 }
 
 static uint32_t name_id_get(const char *name, struct perf_state *ps)

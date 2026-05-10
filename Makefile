@@ -2,7 +2,11 @@
 # Options 
 # ------------------------------------------------------------------------------
 
+ifeq ($(OS),Windows_NT)
+PLAT ?= WINDOWS
+else
 PLAT ?= LINUX
+endif
 TYPE ?= DEBUG
 ASAN ?= 0
 TSAN ?= 0
@@ -164,6 +168,10 @@ EXTRA_DEBUG_FLAGS = -g
 EXTRA_RELEASE_FLAGS = -DNDEBUG
 EXTRA_FLAGS = $(EXTRA_$(TYPE)_FLAGS)
 
+EXTRA_DEBUG_OPT = -O0
+EXTRA_RELEASE_OPT = -O3
+EXTRA_OPT = $(EXTRA_$(TYPE)_OPT)
+
 ifneq ($(ASAN),0)
 ASAN_CFLAGS = -fsanitize=address -static-libasan
 ASAN_LDFLAGS = -fsanitize=address -static-libasan
@@ -186,7 +194,7 @@ CFLAGS = \
 	-I$(OPENAL_SRC)/include \
 	-I$(MIMALLOC_SRC)/include \
 	-std=c99 \
-	-O3 \
+	$(EXTRA_OPT) \
 	-fno-strict-aliasing \
 	-fwrapv \
 	$(ASAN_CFLAGS) \
@@ -326,8 +334,8 @@ run_editor:
 
 launchers:
 ifeq ($(PLAT),WINDOWS)
-	make -C launcher BIN_PATH='.\\\\lib\\\\pf.exe' SCRIPT_PATH="./scripts/rts/main.py" BIN="../demo.exe" launcher
-	make -C launcher BIN_PATH='.\\\\lib\\\\pf.exe' SCRIPT_PATH="./scripts/editor/main.py" BIN="../editor.exe" launcher
+	make -C launcher PLAT=$(PLAT) BIN_PATH='.\\\\lib\\\\pf.exe' SCRIPT_PATH="./scripts/rts/main.py" BIN="../demo.exe" launcher
+	make -C launcher PLAT=$(PLAT) BIN_PATH='.\\\\lib\\\\pf.exe' SCRIPT_PATH="./scripts/editor/main.py" BIN="../editor.exe" launcher
 else
 	make -C launcher BIN_PATH=$(BIN) SCRIPT_PATH="./scripts/rts/main.py" BIN="../demo" launcher
 	make -C launcher BIN_PATH=$(BIN) SCRIPT_PATH="./scripts/editor/main.py" BIN="../editor" launcher

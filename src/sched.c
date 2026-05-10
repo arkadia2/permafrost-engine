@@ -404,12 +404,13 @@ static bool stack_pointer_valid(const struct task *task)
 
 static uint64_t thread_id_to_key(SDL_threadID tid)
 {
-    union{
-        SDL_threadID as_tid;
-        uint64_t     as_u64;
-    }ret = {0};
-    ret.as_tid = tid;
-    return ret.as_u64;
+    // union{
+    //     SDL_threadID as_tid;
+    //     uint64_t     as_u64;
+    // }ret = {0};
+    // ret.as_tid = tid;
+    // return ret.as_u64;
+    return (uint64_t)tid;
 }
 
 static void sched_set_thread_tid(SDL_threadID id, uint32_t tid)
@@ -871,6 +872,7 @@ static void sched_init_thread_tid_map(void)
     k = kh_put(tid, s_thread_tid_map, main_key, &status);
     assert(status != -1 && status != 0);
     kh_value(s_thread_tid_map, k) = NULL_TID;
+    fprintf(stdout, ">> sched_init_thread_tid_map main key:%llu tid:%ld k:%d v:%d\n", main_key, g_main_thread_id, k, NULL_TID);
 
     for(int i = 0; i < s_nworkers; i++) {
 
@@ -879,6 +881,7 @@ static void sched_init_thread_tid_map(void)
         k = kh_put(tid, s_thread_tid_map, key, &status);
         assert(status != -1 && status != 0);
         kh_value(s_thread_tid_map, k) = NULL_TID;
+        fprintf(stdout, ">> sched_init_thread_tid_map worker key:%llu tid:%ld k:%d v:%d\n", key, SDL_GetThreadID(s_worker_threads[i]), k, NULL_TID);
     }
 }
 
