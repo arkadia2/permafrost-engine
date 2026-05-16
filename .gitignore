@@ -60,3 +60,5 @@ deps/openal-soft/utils/alsoft-config/alsoft-config.sln
 deps/openal-soft/utils/alsoft-config/cmake_install.cmake
 deps/openal-soft/version.h
 
+/cache/
+

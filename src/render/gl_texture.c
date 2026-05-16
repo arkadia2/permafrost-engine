@@ -38,6 +38,8 @@
 #include "gl_texture.h"
 #include "gl_state.h"
 #include "gl_assert.h"
+
+#include <direct.h>
 #include "gl_material.h"
 #include "gl_image_quilt.h"
 #include "gl_swapchain.h"
@@ -49,6 +51,7 @@
 #include "../loading_screen.h"
 #include "../config.h"
 #include "../main.h"
+#include "../log.h"
 
 #include <string.h>
 #include <assert.h>
@@ -595,12 +598,115 @@ void R_GL_Texture_ArrayMakeMap(const char texnames[][256], size_t num_textures,
     GL_ASSERT_OK();
 }
 
-size_t R_GL_Texture_ArrayMakeMapWangTileset(const char texnames[][256], size_t num_textures, 
+static uint32_t crc32(const uint8_t *data, size_t len)
+{
+    uint32_t crc = 0xFFFFFFFF;
+    while(len--) {
+        crc ^= *data++;
+        for(int i = 0; i < 8; i++) {
+            crc = (crc >> 1) ^ (crc & 1 ? 0xEDB88320 : 0);
+        }
+    }
+    return ~crc;
+}
+
+static bool save_single_tileset_cache(const char *texname, size_t tileset_dim, 
+                                       GLubyte *tiles_data, size_t tiles_count)
+{
+    char cache_path[512];
+    pf_snprintf(cache_path, sizeof(cache_path), "%s/cache/wang_%s_%zux%zu.cache", 
+                g_basepath, texname, tileset_dim, tileset_dim);
+
+    char dir_path[512];
+    pf_snprintf(dir_path, sizeof(dir_path), "%s/cache", g_basepath);
+    _mkdir(dir_path);
+
+    FILE *fp = fopen(cache_path, "wb");
+    if(!fp) {
+        LOG_WARNING("Failed to open tileset cache for writing: %s", cache_path);
+        return false;
+    }
+
+    uint32_t magic = 0x57414E47;
+    uint32_t version = 1;
+    size_t buf_size = tileset_dim * tileset_dim * tiles_count * 4;
+    uint32_t checksum = crc32((uint8_t*)tiles_data, buf_size);
+    
+    fwrite(&magic, sizeof(magic), 1, fp);
+    fwrite(&version, sizeof(version), 1, fp);
+    fwrite(&tileset_dim, sizeof(tileset_dim), 1, fp);
+    fwrite(&tiles_count, sizeof(tiles_count), 1, fp);
+    fwrite(&checksum, sizeof(checksum), 1, fp);
+    fwrite(tiles_data, 1, buf_size, fp);
+
+    fclose(fp);
+    return true;
+}
+
+static bool load_single_tileset_cache(const char *texname, size_t tileset_dim,
+                                      GLubyte *out_tiles_data, size_t tiles_count)
+{
+    char cache_path[512];
+    pf_snprintf(cache_path, sizeof(cache_path), "%s/cache/wang_%s_%zux%zu.cache", 
+                g_basepath, texname, tileset_dim, tileset_dim);
+
+    FILE *fp = fopen(cache_path, "rb");
+    if(!fp) {
+        LOG_DEBUG("Tileset cache not found: %s", cache_path);
+        return false;
+    }
+
+    uint32_t magic, version, stored_checksum;
+    size_t cache_tileset_dim, cache_tiles_count;
+    
+    if(fread(&magic, sizeof(magic), 1, fp) != 1 || magic != 0x57414E47) {
+        fclose(fp);
+        LOG_WARNING("Invalid tileset cache magic: %s", cache_path);
+        return false;
+    }
+    
+    if(fread(&version, sizeof(version), 1, fp) != 1 || version != 1) {
+        fclose(fp);
+        LOG_WARNING("Unsupported tileset cache version: %s", cache_path);
+        return false;
+    }
+    
+    fread(&cache_tileset_dim, sizeof(cache_tileset_dim), 1, fp);
+    fread(&cache_tiles_count, sizeof(cache_tiles_count), 1, fp);
+    fread(&stored_checksum, sizeof(stored_checksum), 1, fp);
+
+    if(cache_tileset_dim != tileset_dim || cache_tiles_count != tiles_count) {
+        fclose(fp);
+        LOG_WARNING("Tileset cache dimensions mismatch: %s", cache_path);
+        return false;
+    }
+
+    size_t buf_size = tileset_dim * tileset_dim * tiles_count * 4;
+    if(fread(out_tiles_data, 1, buf_size, fp) != buf_size) {
+        fclose(fp);
+        LOG_WARNING("Failed to read tileset cache data: %s", cache_path);
+        return false;
+    }
+
+    uint32_t computed_checksum = crc32((uint8_t*)out_tiles_data, buf_size);
+    if(computed_checksum != stored_checksum) {
+        fclose(fp);
+        LOG_WARNING("Tileset cache checksum mismatch (corrupted): %s", cache_path);
+        return false;
+    }
+
+    fclose(fp);
+    return true;
+}
+
+size_t R_GL_Texture_ArrayMakeMapWangTileset(const char texnames[][256], size_t num_textures,
                                             struct texture_arr *out, GLuint tunit)
 {
     ASSERT_IN_RENDER_THREAD();
 
-    size_t ret = 0;
+    uint64_t func_start = SDL_GetPerformanceCounter();
+    uint64_t freq = SDL_GetPerformanceFrequency();
+
     size_t tileset_dim = R_GL_ImageQuilt_TilesetDim();
     size_t num_slots = num_textures * 8;
 
@@ -609,12 +715,16 @@ size_t R_GL_Texture_ArrayMakeMapWangTileset(const char texnames[][256], size_t n
     size_t num_arrays = ceil((float)num_slots / max_layers);
     size_t slots_per_array = (max_layers / 8) * 8;
 
+    size_t ret = 0;
+    int cache_hits = 0;
+    int cache_misses = 0;
+
     GLuint fbo;
     glGenFramebuffers(1, &fbo);
 
     int i = 0;
     size_t slots_consumed = 0;
-    for(int n = 0; n < num_arrays; n++) {
+    for(int n = 0; n < (int)num_arrays; n++) {
 
         size_t slots_left = num_slots - (n * slots_per_array);
         size_t curr_slots = MIN(slots_left, slots_per_array);
@@ -632,61 +742,76 @@ size_t R_GL_Texture_ArrayMakeMapWangTileset(const char texnames[][256], size_t n
 
         for(; i < num_textures; i++) {
 
-            /* Since generating the tilesets may take a while, invoke 
-             * an event pump on the main thread and re-present the loading
-             * screen to avoid losing responsiveness. 
-             */
-            LoadingScreen_PushRenderStatus("Generating tileset: %s", texnames[i]);
-            R_Yield();
+            if((i * 8) >= curr_slots + slots_consumed) {
+                break;
+            }
 
             char path[512];
             pf_snprintf(path, sizeof(path), "%s/assets/map_textures/%s", g_basepath, texnames[i]);
 
-            /* Move on to the next texture array, this one's full */
-            if((i * 8) >= curr_slots + slots_consumed) {
-                LoadingScreen_PopRenderStatus();
-                break;
+            uint64_t tileset_start = SDL_GetPerformanceCounter();
+            
+            size_t tiles_count = 8;
+            size_t tiles_data_size = tileset_dim * tileset_dim * tiles_count * 4;
+            GLubyte *tiles_data = malloc(tiles_data_size);
+            bool from_cache = false;
+
+            if(load_single_tileset_cache(texnames[i], tileset_dim, tiles_data, tiles_count)) {
+                from_cache = true;
+                cache_hits++;
+                LOG_DEBUG("Tileset cache hit: %s", texnames[i]);
+            } else {
+                struct texture_arr tiles;
+                bool success = R_GL_ImageQuilt_MakeTileset(path, &tiles, tunit);
+                
+                if(success) {
+                    glActiveTexture(tiles.tunit);
+                    glBindTexture(GL_TEXTURE_2D_ARRAY, tiles.id);
+                    glGetTexImage(GL_TEXTURE_2D_ARRAY, 0, GL_RGBA, GL_UNSIGNED_BYTE, tiles_data);
+                    R_GL_Texture_ArrayFree(tiles);
+                    save_single_tileset_cache(texnames[i], tileset_dim, tiles_data, tiles_count);
+                } else {
+                    free(tiles_data);
+                    tiles_data = calloc(1, tiles_data_size);
+                    memset(tiles_data, 0, tileset_dim * tileset_dim * 4);
+                }
+                cache_misses++;
             }
 
-            struct texture_arr tiles;
-            bool success = R_GL_ImageQuilt_MakeTileset(path, &tiles, tunit);
-            if(success) {
+            LoadingScreen_PushRenderStatus("Loading tileset (%d/%zu): %s %s", 
+                i + 1, num_textures, texnames[i], from_cache ? "(cached)" : "");
+            R_Yield();
 
-                for(int j = 0; j < 8; j++) {
+            int dst_slot_start = (i * 8) - slots_consumed;
+            
+            glActiveTexture(out->tunit);
+            glBindTexture(GL_TEXTURE_2D_ARRAY, out->id);
 
-                    int dst_idx = (i * 8) + j - slots_consumed;
-                    int src_idx = j;
+            for(int j = 0; j < (int)tiles_count; j++) {
+                int dst_idx = dst_slot_start + j;
+                int src_idx = j;
 
-                    R_GL_StatePushRenderTarget(fbo);
-                    glFramebufferTextureLayer(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, 
-                        tiles.id, 0, src_idx);
-                    glFramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, 
-                        out->id, 0, dst_idx);
-                    glReadBuffer(GL_COLOR_ATTACHMENT0);
-                    glDrawBuffer(GL_COLOR_ATTACHMENT1);
+                R_GL_StatePushRenderTarget(fbo);
+                glFramebufferTextureLayer(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, 
+                    out->id, 0, src_idx);
+                glFramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, 
+                    out->id, 0, dst_idx);
+                glReadBuffer(GL_COLOR_ATTACHMENT0);
+                glDrawBuffer(GL_COLOR_ATTACHMENT1);
 
-                    assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
-                    glBlitFramebuffer(0, 0, tileset_dim, tileset_dim, 0, 0, tileset_dim, tileset_dim, 
-                                      GL_COLOR_BUFFER_BIT, GL_NEAREST);
-                    R_GL_StatePopRenderTarget();
-                    GL_ASSERT_OK();
-                }
-                R_GL_Texture_ArrayFree(tiles);
-
-            }else{
-
-                GLubyte *data = calloc(1, tileset_dim * tileset_dim * 3);
-                if(!data) {
-                    LoadingScreen_PopRenderStatus();
-                    continue;
-                }
-
-                for(int j = 0; j < 8; j++) {
-                    glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, (i * 8) + j, tileset_dim, 
-                        tileset_dim, 1, GL_RGB, GL_UNSIGNED_BYTE, data);
-                }
-                PF_FREE(data);
+                assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
+                glBlitFramebuffer(0, 0, tileset_dim, tileset_dim, 0, 0, tileset_dim, tileset_dim, 
+                                  GL_COLOR_BUFFER_BIT, GL_NEAREST);
+                R_GL_StatePopRenderTarget();
+                GL_ASSERT_OK();
             }
+
+            free(tiles_data);
+
+            uint64_t tileset_end = SDL_GetPerformanceCounter();
+            LOG_DEBUG("Tileset %s (%d/%zu) [%s]: %.2fms",
+                from_cache ? "(cached)" : "", i + 1, num_textures, texnames[i], 
+                (double)(tileset_end - tileset_start) / freq * 1000.0);
 
             glActiveTexture(tunit);
             glBindTexture(GL_TEXTURE_2D_ARRAY, out->id);
@@ -709,6 +834,10 @@ size_t R_GL_Texture_ArrayMakeMapWangTileset(const char texnames[][256], size_t n
     glDeleteFramebuffers(1, &fbo);
     glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
     GL_ASSERT_OK();
+
+    uint64_t func_end = SDL_GetPerformanceCounter();
+    LOG_INFO("R_GL_Texture_ArrayMakeMapWangTileset [%zu textures]: %.2fms (cache hits: %d, misses: %d)",
+        num_textures, (double)(func_end - func_start) / freq * 1000.0, cache_hits, cache_misses);
     return ret;
 }
 

@@ -381,16 +381,30 @@ static bool engine_init(void)
     Log_Init(logfile);
     LOG_INFO("Starting Permafrost Engine...");
 
+    uint64_t start_time = SDL_GetPerformanceCounter();
+    uint64_t freq = SDL_GetPerformanceFrequency();
+    uint64_t prev_time = start_time;
+
+#define LOG_INIT_TIME(name) \
+    do { \
+        uint64_t curr = SDL_GetPerformanceCounter(); \
+        LOG_DEBUG("Init " name ": %.2fms", (double)(curr - prev_time) / freq * 1000.0); \
+        prev_time = curr; \
+    } while(0)
+
     Noise_Init();
+    LOG_INIT_TIME("Noise");
 
     if(!Perf_Init()) {
         LOG_ERROR("Failed to initialize performance module.");
         return false;;
     }
+    LOG_INIT_TIME("Perf");
 
     vec_event_init(&s_prev_tick_events);
     if(!vec_event_resize(&s_prev_tick_events, EVENT_VEC_SIZE))
         goto fail_resize;
+    LOG_INIT_TIME("Events");
 
     /* Initialize 'Settings' before any subsystem to allow all of them 
      * to register settings. */
@@ -398,17 +412,20 @@ static bool engine_init(void)
         LOG_ERROR("Failed to initialize settings module.");
         goto fail_settings;
     }
+    LOG_INIT_TIME("Settings");
 
     ss_e status;
     if((status = Settings_LoadFromFile()) != SS_OKAY) {
         LOG_WARNING("Could not load settings from file: %s [status: %d]", 
             Settings_GetFile(), status);
     }
+    LOG_INIT_TIME("Settings_Load");
 
     if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0) {
         LOG_ERROR("Failed to initialize SDL: %s", SDL_GetError());
         goto fail_sdl;
     }
+    LOG_INIT_TIME("SDL");
 
     SDL_DisplayMode dm;
     SDL_GetDesktopDisplayMode(0, &dm);
@@ -440,10 +457,12 @@ static bool engine_init(void)
         res[0], 
         res[1], 
         SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | wf | extra_flags);
+    LOG_INIT_TIME("Window");
 
     LoadingScreen_Init();
     engine_set_icon();
     stbi_set_flip_vertically_on_load(true);
+    LOG_INIT_TIME("LoadingScreen");
 
     LoadingScreen_DrawEarly(s_window);
 
@@ -451,6 +470,7 @@ static bool engine_init(void)
         LOG_ERROR("Failed to initialize the render sync state.");
         goto fail_rstate;
     }
+    LOG_INIT_TIME("RState");
 
     struct render_init_arg rarg = (struct render_init_arg) {
         .in_window = s_window,
@@ -469,6 +489,7 @@ static bool engine_init(void)
     render_thread_start_work();
     render_thread_wait_done();
     render_maybe_enable();
+    LOG_INIT_TIME("Render_Thread");
 
     if(!rarg.out_success)
         goto fail_render_init;
@@ -480,47 +501,56 @@ static bool engine_init(void)
         LOG_ERROR("Failed to initialize scheduling module.");
         goto fail_sched;
     }
+    LOG_INIT_TIME("Sched");
 
     if(!Session_Init()) {
         LOG_ERROR("Failed to initialize session module.");
         goto fail_sesh;
     }
+    LOG_INIT_TIME("Session");
 
     if(!AL_Init()) {
         LOG_ERROR("Failed to initialize asset-loading module.");
         goto fail_al;
     }
+    LOG_INIT_TIME("Asset_Loading");
 
     if(!Cursor_InitDefault(g_basepath)) {
         LOG_ERROR("Failed to initialize cursor module");
         goto fail_cursor;
     }
     Cursor_SetActive(CURSOR_POINTER);
+    LOG_INIT_TIME("Cursor");
 
     if(!E_Init()) {
         LOG_ERROR("Failed to initialize event subsystem");
         goto fail_event;
     }
+    LOG_INIT_TIME("Event");
 
     if(!Entity_Init()) {
         LOG_ERROR("Failed to initialize entity subsystem");
         goto fail_entity;
     }
+    LOG_INIT_TIME("Entity");
 
     if(!A_Init()) {
         LOG_ERROR("Failed to initialize animation subsystem");
         goto fail_anim;
     }
+    LOG_INIT_TIME("Anim");
 
     if(!G_Init()) {
         LOG_ERROR("Failed to initialize game subsystem");
         goto fail_game;
     }
+    LOG_INIT_TIME("Game");
 
     if(!R_Init(g_basepath)) {
         LOG_ERROR("Failed to initialize rendering subsystem");
         goto fail_render;
     }
+    LOG_INIT_TIME("Render");
 
     E_Global_Register(SDL_QUIT, on_user_quit, NULL, 
         G_RUNNING | G_PAUSED_UI_RUNNING | G_PAUSED_FULL);
@@ -529,33 +559,43 @@ static bool engine_init(void)
         LOG_ERROR("Failed to initialize nuklear");
         goto fail_nuklear;
     }
+    LOG_INIT_TIME("UI");
 
     if(!S_Init(s_argv[0], g_basepath, UI_GetContext())) {
         LOG_ERROR("Failed to initialize scripting subsystem");
         goto fail_script;
     }
+    LOG_INIT_TIME("Scripting");
 
     if(!N_Init()) {
         LOG_ERROR("Failed to initialize navigation subsystem");
         goto fail_nav;
     }
+    LOG_INIT_TIME("Nav");
 
     if(!Audio_Init()) {
         LOG_ERROR("Failed to initialize audio subsystem");
         goto fail_audio;
     }
+    LOG_INIT_TIME("Audio");
 
     if(!P_Projectile_Init()) {
         LOG_ERROR("Failed to initialize physics subsystem");
         goto fail_phys;
     }
+    LOG_INIT_TIME("Physics");
 
     if(!Sprite_Init()) {
         LOG_ERROR("Failed to initialize sprite subsystem");
         goto fail_sprite;
     }
+    LOG_INIT_TIME("Sprite");
 
     engine_create_settings();
+    LOG_INIT_TIME("Settings_Final");
+
+    uint64_t end_time = SDL_GetPerformanceCounter();
+    LOG_INFO("Engine initialized in %.2fms", (double)(end_time - start_time) / freq * 1000.0);
     return true;
 
 fail_sprite:
