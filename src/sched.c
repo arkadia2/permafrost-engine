@@ -48,6 +48,7 @@
 #include "lib/public/pf_string.h"
 #include "lib/public/mem.h"
 #include "lib/public/block_allocator.h"
+#include "log.h"
 
 #include <SDL.h>
 #include <mimalloc-stats.h>
@@ -872,7 +873,7 @@ static void sched_init_thread_tid_map(void)
     k = kh_put(tid, s_thread_tid_map, main_key, &status);
     assert(status != -1 && status != 0);
     kh_value(s_thread_tid_map, k) = NULL_TID;
-    fprintf(stdout, ">> sched_init_thread_tid_map main key:%llu tid:%ld k:%d v:%d\n", main_key, g_main_thread_id, k, NULL_TID);
+    LOG_DEBUG("sched_init_thread_tid_map main key:%llu tid:%ld k:%d v:%d", main_key, g_main_thread_id, k, NULL_TID);
 
     for(int i = 0; i < s_nworkers; i++) {
 
@@ -881,7 +882,7 @@ static void sched_init_thread_tid_map(void)
         k = kh_put(tid, s_thread_tid_map, key, &status);
         assert(status != -1 && status != 0);
         kh_value(s_thread_tid_map, k) = NULL_TID;
-        fprintf(stdout, ">> sched_init_thread_tid_map worker key:%llu tid:%ld k:%d v:%d\n", key, SDL_GetThreadID(s_worker_threads[i]), k, NULL_TID);
+        LOG_DEBUG("sched_init_thread_tid_map worker key:%llu tid:%ld k:%d v:%d", key, SDL_GetThreadID(s_worker_threads[i]), k, NULL_TID);
     }
 }
 

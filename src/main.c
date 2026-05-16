@@ -58,11 +58,13 @@
 #include "sched.h"
 #include "sprite.h"
 #include "loading_screen.h"
+#include "log.h"
 
 #include <stdbool.h>
 #include <assert.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
 #if defined(_WIN32)
 #include "lib/public/windows.h"
@@ -351,13 +353,13 @@ static void engine_set_icon(void)
         &orig_format, STBI_rgb_alpha);
 
     if(!image) {
-        fprintf(stderr, "Failed to load client icon image: %s\n", fullpath);
+        LOG_WARNING("Failed to load client icon image: %s", fullpath);
         return;
     }
 
     SDL_Surface *surface = SDL_CreateRGBSurfaceWithFormat(0, width, height, 32, SDL_PIXELFORMAT_RGBA32);
     if(!surface) {
-        fprintf(stderr, "Failed to create surface from client icon image: %s\n", fullpath);
+        LOG_WARNING("Failed to create surface from client icon image: %s", fullpath);
         goto fail_surface;
     }
 
@@ -371,10 +373,18 @@ fail_surface:
 static bool engine_init(void)
 {
     g_main_thread_id = SDL_ThreadID();
+    
+    char logfile[64];
+    time_t now = time(NULL);
+    struct tm *tm = localtime(&now);
+    strftime(logfile, sizeof(logfile), "game_%y%m%d_%H%M%S.log", tm);
+    Log_Init(logfile);
+    LOG_INFO("Starting Permafrost Engine...");
+
     Noise_Init();
 
     if(!Perf_Init()) {
-        fprintf(stderr, "Failed to initialize performance module.\n");
+        LOG_ERROR("Failed to initialize performance module.");
         return false;;
     }
 
@@ -385,18 +395,18 @@ static bool engine_init(void)
     /* Initialize 'Settings' before any subsystem to allow all of them 
      * to register settings. */
     if(Settings_Init() != SS_OKAY) {
-        fprintf(stderr, "Failed to initialize settings module.\n");
+        LOG_ERROR("Failed to initialize settings module.");
         goto fail_settings;
     }
 
     ss_e status;
     if((status = Settings_LoadFromFile()) != SS_OKAY) {
-        fprintf(stderr, "Could not load settings from file: %s [status: %d]\n", 
+        LOG_WARNING("Could not load settings from file: %s [status: %d]", 
             Settings_GetFile(), status);
     }
 
     if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0) {
-        fprintf(stderr, "Failed to initialize SDL: %s\n", SDL_GetError());
+        LOG_ERROR("Failed to initialize SDL: %s", SDL_GetError());
         goto fail_sdl;
     }
 
@@ -438,7 +448,7 @@ static bool engine_init(void)
     LoadingScreen_DrawEarly(s_window);
 
     if(!rstate_init(&s_rstate)) {
-        fprintf(stderr, "Failed to initialize the render sync state.\n");
+        LOG_ERROR("Failed to initialize the render sync state.");
         goto fail_rstate;
     }
 
@@ -452,7 +462,7 @@ static bool engine_init(void)
     s_render_thread = R_Run(&s_rstate);
 
     if(!s_render_thread) {
-        fprintf(stderr, "Failed to start the render thread.\n");
+        LOG_ERROR("Failed to start the render thread.");
         goto fail_rthread;
     }
 
@@ -467,48 +477,48 @@ static bool engine_init(void)
     Perf_RegisterThread(g_render_thread_id, "render");
 
     if(!Sched_Init()) {
-        fprintf(stderr, "Failed to initialize scheduling module.\n");
+        LOG_ERROR("Failed to initialize scheduling module.");
         goto fail_sched;
     }
 
     if(!Session_Init()) {
-        fprintf(stderr, "Failed to initialize session module.\n");
+        LOG_ERROR("Failed to initialize session module.");
         goto fail_sesh;
     }
 
     if(!AL_Init()) {
-        fprintf(stderr, "Failed to initialize asset-loading module.\n");
+        LOG_ERROR("Failed to initialize asset-loading module.");
         goto fail_al;
     }
 
     if(!Cursor_InitDefault(g_basepath)) {
-        fprintf(stderr, "Failed to initialize cursor module\n");
+        LOG_ERROR("Failed to initialize cursor module");
         goto fail_cursor;
     }
     Cursor_SetActive(CURSOR_POINTER);
 
     if(!E_Init()) {
-        fprintf(stderr, "Failed to initialize event subsystem\n");
+        LOG_ERROR("Failed to initialize event subsystem");
         goto fail_event;
     }
 
     if(!Entity_Init()) {
-        fprintf(stderr, "Failed to initialize event subsystem\n");
+        LOG_ERROR("Failed to initialize entity subsystem");
         goto fail_entity;
     }
 
     if(!A_Init()) {
-        fprintf(stderr, "Failed to initialize animation subsystem\n");
+        LOG_ERROR("Failed to initialize animation subsystem");
         goto fail_anim;
     }
 
     if(!G_Init()) {
-        fprintf(stderr, "Failed to initialize game subsystem\n");
+        LOG_ERROR("Failed to initialize game subsystem");
         goto fail_game;
     }
 
     if(!R_Init(g_basepath)) {
-        fprintf(stderr, "Failed to intiaialize rendering subsystem\n");
+        LOG_ERROR("Failed to initialize rendering subsystem");
         goto fail_render;
     }
 
@@ -516,32 +526,32 @@ static bool engine_init(void)
         G_RUNNING | G_PAUSED_UI_RUNNING | G_PAUSED_FULL);
 
     if(!UI_Init(g_basepath, s_window)) {
-        fprintf(stderr, "Failed to initialize nuklear\n");
+        LOG_ERROR("Failed to initialize nuklear");
         goto fail_nuklear;
     }
 
     if(!S_Init(s_argv[0], g_basepath, UI_GetContext())) {
-        fprintf(stderr, "Failed to initialize scripting subsystem\n");
+        LOG_ERROR("Failed to initialize scripting subsystem");
         goto fail_script;
     }
 
     if(!N_Init()) {
-        fprintf(stderr, "Failed to intialize navigation subsystem\n");
+        LOG_ERROR("Failed to initialize navigation subsystem");
         goto fail_nav;
     }
 
     if(!Audio_Init()) {
-        fprintf(stderr, "Failed to intialize audio subsystem\n");
+        LOG_ERROR("Failed to initialize audio subsystem");
         goto fail_audio;
     }
 
     if(!P_Projectile_Init()) {
-        fprintf(stderr, "Failed to intialize physics subsystem\n");
+        LOG_ERROR("Failed to initialize physics subsystem");
         goto fail_phys;
     }
 
     if(!Sprite_Init()) {
-        fprintf(stderr, "Failed to initialize sprite susbystem\n");
+        LOG_ERROR("Failed to initialize sprite subsystem");
         goto fail_sprite;
     }
 

@@ -41,6 +41,7 @@
 #include "lib/public/mem.h"
 #include "lib/public/khash.h"
 #include "lib/public/pf_string.h"
+#include "log.h"
 
 #include <SDL.h>
 #include <string.h>
@@ -147,7 +148,7 @@ static bool sett_add_priv(const char *key, struct setting_priv priv)
     khiter_t k = kh_get(settpriv, s_priv_table, key);
     if(k != kh_end(s_priv_table)) {
         // 调试信息：重复添加的 key
-        SDL_Log("ERROR: Attempting to add duplicate priv setting key: %s", key);
+        LOG_ERROR("Attempting to add duplicate priv setting key: %s", key);
         assert(k == kh_end(s_priv_table));
     }
 
@@ -233,7 +234,7 @@ ss_e Settings_Create(struct setting sett)
 {
     ASSERT_IN_MAIN_THREAD();
 
-    SDL_Log("DEBUG: Settings_Create called for: %s", sett.name);
+    LOG_DEBUG("Settings_Create called for: %s", sett.name);
 
     khiter_t k = kh_get(setting, s_settings_table, sett.name);
     struct sval saved;
@@ -242,13 +243,13 @@ ss_e Settings_Create(struct setting sett)
     && (saved = kh_value(s_settings_table, k).val, true)
     && (sett.validate && sett.validate(&saved)) ){
     
-        SDL_Log("DEBUG: Setting '%s' already exists, preserving value", sett.name);
+        LOG_DEBUG("Setting '%s' already exists, preserving value", sett.name);
         sett.val = saved;
 
     }else {
 
         const char *key = pf_strdup(sett.name);
-        SDL_Log("DEBUG: Creating new setting '%s' with key pointer: %p", sett.name, key);
+        LOG_DEBUG("Creating new setting '%s' with key pointer: %p", sett.name, key);
 
         int put_status;
         k = kh_put(setting, s_settings_table, key, &put_status);
@@ -256,7 +257,7 @@ ss_e Settings_Create(struct setting sett)
         if(put_status == -1)
             return SS_BADALLOC;
         
-        SDL_Log("DEBUG: put_status: %d (0=new key, 1=existing key, 2=deleted key)", put_status);
+        LOG_DEBUG("put_status: %d (0=new key, 1=existing key, 2=deleted key)", put_status);
         
         if(!sett_add_priv(key, (struct setting_priv){0}))
             return SS_BADALLOC;
@@ -478,7 +479,7 @@ ss_e Settings_LoadFromFile(void)
                 strcpy(sett.name, nv.name);
                 ss_e create_status = Settings_Create(sett);
                 if(create_status != SS_OKAY) {
-                    SDL_Log("WARNING: Failed to create setting '%s' from config file (status: %d). "
+                    LOG_WARNING("Failed to create setting '%s' from config file (status: %d). "
                            "The value might be invalid for this setting's validation rules.", 
                             sett.name, create_status);
                 }
