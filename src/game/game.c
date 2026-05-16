@@ -1724,7 +1724,18 @@ void G_ClearState(void)
     G_SetActiveCamera(s_gs.active_cam, CAM_MODE_RTS);
 
     G_Sel_Enable();
-    G_Fog_Enable();
+    
+    struct sval fog_val;
+    if(Settings_Get("pf.game.fog_of_war_enabled", &fog_val) == SS_OKAY) {
+        if(fog_val.as_bool) {
+            G_Fog_Enable();
+        } else {
+            G_Fog_Disable();
+        }
+    } else {
+        G_Fog_Enable();  // 默认启用
+    }
+    
     G_StorageSite_ClearState();
 
     s_gs.factions_allocd = 0;
