@@ -71,6 +71,7 @@
 #include "../session.h"
 #include "../perf.h"
 #include "../cursor.h"
+#include "../log.h"
 #include "../task.h"
 #include "../sched.h"
 #include "../asset_load.h"
@@ -963,6 +964,9 @@ static void s_on_update(void *user, void *event)
 
 static PyObject *PyPf_load_map(PyObject *self, PyObject *args, PyObject *kwargs)
 {
+    uint64_t start_time = SDL_GetPerformanceCounter();
+    uint64_t freq = SDL_GetPerformanceFrequency();
+
     static char *kwlist[] = {"dir", "pfmap", "update_navgrid", "absolute", NULL};
     const char *dir, *pfmap;
     int update_navgrid = true;
@@ -1000,6 +1004,10 @@ static PyObject *PyPf_load_map(PyObject *self, PyObject *args, PyObject *kwargs)
     }
 
     SDL_RWclose(stream);
+
+    uint64_t end_time = SDL_GetPerformanceCounter();
+    LOG_DEBUG("pf.load_map [%s/%s]: %.2fms", dir ? dir : "", pfmap, (double)(end_time - start_time) / freq * 1000.0);
+
     Py_RETURN_NONE;
 }
 
@@ -1053,6 +1061,9 @@ static PyObject *PyPf_set_emit_light_color(PyObject *self, PyObject *args)
 
 static PyObject *PyPf_load_scene(PyObject *self, PyObject *args, PyObject *kwargs)
 {
+    uint64_t start_time = SDL_GetPerformanceCounter();
+    uint64_t freq = SDL_GetPerformanceFrequency();
+
     static char *kwlist[] = {"path", "update_navgrid", "absolute", NULL};
     const char *relpath; 
     int update_navgrid = true;
@@ -1100,6 +1111,10 @@ static PyObject *PyPf_load_scene(PyObject *self, PyObject *args, PyObject *kwarg
     PyTuple_SET_ITEM(ret, 0, S_Entity_GetLoaded());
     PyTuple_SET_ITEM(ret, 1, S_Region_GetLoaded());
     PyTuple_SET_ITEM(ret, 2, S_Camera_GetLoaded());
+
+    uint64_t end_time = SDL_GetPerformanceCounter();
+    LOG_DEBUG("pf.load_scene [%s]: %.2fms", relpath, (double)(end_time - start_time) / freq * 1000.0);
+
     return ret;
 
 fail_load:
@@ -1620,6 +1635,9 @@ static PyObject *PyPf_set_active_font(PyObject *self, PyObject *args)
 
 static PyObject *PyPf_set_skybox(PyObject *self, PyObject *args)
 {
+    uint64_t start_time = SDL_GetPerformanceCounter();
+    uint64_t freq = SDL_GetPerformanceFrequency();
+
     const char *dir, *extension;
 
     if(!PyArg_ParseTuple(args, "ss", &dir, &extension)) {
@@ -1628,6 +1646,10 @@ static PyObject *PyPf_set_skybox(PyObject *self, PyObject *args)
     }
 
     G_SetSkybox(dir, extension);
+
+    uint64_t end_time = SDL_GetPerformanceCounter();
+    LOG_DEBUG("pf.set_skybox [%s]: %.2fms", dir, (double)(end_time - start_time) / freq * 1000.0);
+
     Py_RETURN_NONE;
 }
 
@@ -4031,6 +4053,9 @@ void S_Shutdown(void)
 bool S_RunFile(const char *path, int argc, char **argv)
 {
     bool ret = false;
+    uint64_t start_time = SDL_GetPerformanceCounter();
+    uint64_t freq = SDL_GetPerformanceFrequency();
+
     FILE *script = fopen(path, "r");
     if(!script)
         return false;
@@ -4066,7 +4091,12 @@ bool S_RunFile(const char *path, int argc, char **argv)
     Sched_TryYield();
 
     PySys_SetArgvEx(argc + 1, cargv, 0);
+    
+    uint64_t exec_start = SDL_GetPerformanceCounter();
     PyObject *result = PyRun_File(script, path, Py_file_input, global_dict, global_dict);
+    uint64_t exec_end = SDL_GetPerformanceCounter();
+    LOG_DEBUG("Script execution: %.2fms", (double)(exec_end - exec_start) / freq * 1000.0);
+    
     ret = (result != NULL);
     Py_XDECREF(result);
 
@@ -4076,6 +4106,10 @@ bool S_RunFile(const char *path, int argc, char **argv)
 
 done:
     fclose(script);
+    
+    uint64_t total_end = SDL_GetPerformanceCounter();
+    LOG_DEBUG("S_RunFile [%s]: %.2fms", path, (double)(total_end - start_time) / freq * 1000.0);
+    
     return ret;
 }
 

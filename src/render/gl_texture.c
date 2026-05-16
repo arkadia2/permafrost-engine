@@ -759,7 +759,6 @@ size_t R_GL_Texture_ArrayMakeMapWangTileset(const char texnames[][256], size_t n
             if(load_single_tileset_cache(texnames[i], tileset_dim, tiles_data, tiles_count)) {
                 from_cache = true;
                 cache_hits++;
-                LOG_DEBUG("Tileset cache hit: %s", texnames[i]);
             } else {
                 struct texture_arr tiles;
                 bool success = R_GL_ImageQuilt_MakeTileset(path, &tiles, tunit);
