@@ -116,6 +116,7 @@ struct{
     handler_t installed_on_mousemove;
     handler_t installed_on_mousedown;
     handler_t installed_on_mouseup;
+    handler_t installed_on_mousewheel;
     handler_t installed_on_update_end;
 }s_cam_ctx;
 
@@ -270,6 +271,35 @@ static void rts_cam_on_mouseup(void *unused, void *event_arg)
 
     if(e->button.button == SDL_BUTTON_LEFT)
         ctx->pan_disabled = false;
+}
+
+static void rts_cam_on_mousewheel(void *unused, void *event_arg)
+{
+    SDL_Event *e = (SDL_Event*)event_arg;
+    struct camera *cam = s_cam_ctx.active;
+    
+    if(!cam)
+        return;
+    
+    /* Get current camera height */
+    float current_height = Camera_GetHeight(cam);
+    
+    /* Zoom speed: adjust this value to change zoom sensitivity */
+    const float zoom_speed = 15.0f;
+    
+    /* Calculate new height */
+    float new_height = current_height - (e->wheel.y * zoom_speed);
+    
+    /* Clamp height to reasonable range */
+    const float min_height = 20.0f;   /* Close zoom */
+    const float max_height = 300.0f;  /* Far zoom */
+    if(new_height < min_height) new_height = min_height;
+    if(new_height > max_height) new_height = max_height;
+    
+    /* Update camera position with new height */
+    vec3_t pos = Camera_GetPos(cam);
+    pos.y = new_height;
+    Camera_SetPos(cam, pos);
 }
 
 static void rts_cam_on_keydown(void *unused, void *event_arg)
@@ -454,6 +484,7 @@ void CamControl_RTS_Install(struct camera *cam)
     E_Global_Register(SDL_MOUSEMOTION,     rts_cam_on_mousemove,  NULL, G_RUNNING);
     E_Global_Register(SDL_MOUSEBUTTONDOWN, rts_cam_on_mousedown,  NULL, G_RUNNING);
     E_Global_Register(SDL_MOUSEBUTTONUP,   rts_cam_on_mouseup,    NULL, G_RUNNING);
+    E_Global_Register(SDL_MOUSEWHEEL,      rts_cam_on_mousewheel, NULL, G_RUNNING);
     E_Global_Register(EVENT_UPDATE_END,    rts_cam_on_update_end, NULL, 
         G_RUNNING | G_PAUSED_FULL | G_PAUSED_UI_RUNNING);
 
@@ -462,6 +493,7 @@ void CamControl_RTS_Install(struct camera *cam)
     s_cam_ctx.installed_on_mousemove  = rts_cam_on_mousemove;
     s_cam_ctx.installed_on_mousedown  = rts_cam_on_mousedown;
     s_cam_ctx.installed_on_mouseup    = rts_cam_on_mouseup;
+    s_cam_ctx.installed_on_mousewheel = rts_cam_on_mousewheel;
     s_cam_ctx.installed_on_update_end = rts_cam_on_update_end;
     s_cam_ctx.active = cam;
 
@@ -491,6 +523,7 @@ void CamControl_UninstallActive(void)
     if(s_cam_ctx.installed_on_mousemove)  E_Global_Unregister(SDL_MOUSEMOTION,     s_cam_ctx.installed_on_mousemove);
     if(s_cam_ctx.installed_on_mousedown)  E_Global_Unregister(SDL_MOUSEBUTTONDOWN, s_cam_ctx.installed_on_mousedown);
     if(s_cam_ctx.installed_on_mouseup)    E_Global_Unregister(SDL_MOUSEBUTTONUP,   s_cam_ctx.installed_on_mouseup);
+    if(s_cam_ctx.installed_on_mousewheel) E_Global_Unregister(SDL_MOUSEWHEEL,      s_cam_ctx.installed_on_mousewheel);
     if(s_cam_ctx.installed_on_update_end) E_Global_Unregister(EVENT_UPDATE_END,    s_cam_ctx.installed_on_update_end);
 
     memset(&s_cam_ctx, 0, sizeof(s_cam_ctx));
