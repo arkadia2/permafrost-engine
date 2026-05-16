@@ -1298,8 +1298,24 @@ void R_GL_DrawMapOverlayQuads(vec2_t *xz_corners, vec3_t *colors, const size_t *
     GLuint VAO, VBO;
     const size_t surf_verts = *count * 4 * 3;
     const size_t line_verts = *count * 4 * 2;
-    STALLOC(struct colored_vert, surf_vbuff, surf_verts);
-    STALLOC(struct colored_vert, line_vbuff, line_verts);
+    
+    /* Thread-local persistent buffers to avoid per-frame malloc/free */
+    static struct colored_vert *surf_vbuff = NULL;
+    static struct colored_vert *line_vbuff = NULL;
+    static size_t surf_vbuff_cap = 0;
+    static size_t line_vbuff_cap = 0;
+    
+    /* Grow buffers if needed */
+    if(surf_vbuff_cap < surf_verts) {
+        PF_FREE(surf_vbuff);
+        surf_vbuff = malloc(sizeof(struct colored_vert) * surf_verts);
+        surf_vbuff_cap = surf_verts;
+    }
+    if(line_vbuff_cap < line_verts) {
+        PF_FREE(line_vbuff);
+        line_vbuff = malloc(sizeof(struct colored_vert) * line_verts);
+        line_vbuff_cap = line_verts;
+    }
 
     struct colored_vert *surf_vbuff_base = surf_vbuff;
     struct colored_vert *line_vbuff_base = line_vbuff;
@@ -1424,8 +1440,7 @@ void R_GL_DrawMapOverlayQuads(vec2_t *xz_corners, vec3_t *colors, const size_t *
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
 
-    STFREE(surf_vbuff);
-    STFREE(line_vbuff);
+    /* Don't free buffers - they're reused across frames */
 
     GL_ASSERT_OK();
     GL_PERF_RETURN_VOID();
