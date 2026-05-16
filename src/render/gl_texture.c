@@ -788,21 +788,10 @@ size_t R_GL_Texture_ArrayMakeMapWangTileset(const char texnames[][256], size_t n
 
             for(int j = 0; j < (int)tiles_count; j++) {
                 int dst_idx = dst_slot_start + j;
-                int src_idx = j;
 
-                R_GL_StatePushRenderTarget(fbo);
-                glFramebufferTextureLayer(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, 
-                    out->id, 0, src_idx);
-                glFramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, 
-                    out->id, 0, dst_idx);
-                glReadBuffer(GL_COLOR_ATTACHMENT0);
-                glDrawBuffer(GL_COLOR_ATTACHMENT1);
-
-                assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
-                glBlitFramebuffer(0, 0, tileset_dim, tileset_dim, 0, 0, tileset_dim, tileset_dim, 
-                                  GL_COLOR_BUFFER_BIT, GL_NEAREST);
-                R_GL_StatePopRenderTarget();
-                GL_ASSERT_OK();
+                glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, dst_idx,
+                    tileset_dim, tileset_dim, 1, GL_RGBA, GL_UNSIGNED_BYTE,
+                    tiles_data + (j * tileset_dim * tileset_dim * 4));
             }
 
             free(tiles_data);
